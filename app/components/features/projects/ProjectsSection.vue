@@ -29,8 +29,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" id="work" class="py-16 md:py-24">
-    <UiSectionHeading number="02" title="FEATURED WORK" />
+  <section ref="sectionRef" id="work">
+    <UiSectionHeading number="03" title="FEATURED WORK" />
 
     <div class="space-y-6">
       <FeaturesProjectsCard

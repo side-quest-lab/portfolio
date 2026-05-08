@@ -52,8 +52,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="py-16 md:py-24">
-    <UiSectionHeading number="04" title="SKILLS & EXPERTISE" />
+  <section ref="sectionRef">
+    <UiSectionHeading number="05" title="SKILLS & EXPERTISE" />
 
     <div class="space-y-10">
       <div v-for="group in groupedSkills" :key="group.category" class="skill-category">

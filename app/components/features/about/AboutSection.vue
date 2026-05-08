@@ -40,8 +40,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" id="about" class="py-16 md:py-24">
-    <span class="text-sm text-foreground/30 font-dm-mono block mb-4"> 05 </span>
+  <section ref="sectionRef" id="about">
+    <span class="text-sm text-foreground/30 font-dm-mono block mb-4"> 02 </span>
 
     <h2
       class="about-heading font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-foreground max-w-3xl leading-tight mb-8"

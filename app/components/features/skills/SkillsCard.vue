@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Skill } from "~~/shared/types";
+import type { Skill } from "#shared/types";
 
 defineProps<{
   skill: Skill;
@@ -8,23 +8,37 @@ defineProps<{
 
 <template>
   <div
-    class="bg-foreground/5 rounded-xl p-4 border border-foreground/5 hover:border-foreground/10 hover:bg-foreground/[0.07] transition-colors"
+    class="group relative bg-foreground/3 rounded-2xl p-5 border border-foreground/5 hover:border-primary/20 hover:bg-foreground/6 transition-all duration-300"
   >
-    <h4 class="font-space-grotesk font-medium text-foreground text-sm mb-3">
-      {{ skill.name }}
-    </h4>
+    <div class="flex items-center gap-4 mb-4">
+      <div
+        class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors"
+        :style="{ backgroundColor: `${skill.icon.color}15` }"
+      >
+        <UIcon :name="skill.icon.name" class="w-6 h-6" :style="{ color: skill.icon.color }" />
+      </div>
 
-    <div class="flex items-center gap-1.5 mb-2">
+      <div class="min-w-0">
+        <h4 class="font-space-grotesk font-semibold text-foreground text-sm truncate">
+          {{ skill.name }}
+        </h4>
+        <span class="text-xs text-foreground/40 font-dm-mono">
+          {{ skill.yearsOfExperience }}
+          {{ skill.yearsOfExperience === 1 ? "year" : "years" }}
+        </span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-1">
       <span
         v-for="i in 5"
         :key="i"
-        class="w-2.5 h-2.5 rounded-full transition-colors"
-        :class="i <= skill.level ? 'bg-primary' : 'bg-foreground/10'"
+        class="h-1.5 rounded-full transition-all duration-300"
+        :class="[
+          i <= skill.level ? 'bg-primary' : 'bg-foreground/10',
+          i === 1 ? 'w-6' : i === 2 ? 'w-5' : i === 3 ? 'w-4' : i === 4 ? 'w-3' : 'w-2',
+        ]"
       />
     </div>
-
-    <span class="text-xs text-foreground/40 font-dm-mono">
-      {{ skill.yearsOfExperience }} {{ skill.yearsOfExperience === 1 ? "year" : "years" }}
-    </span>
   </div>
 </template>

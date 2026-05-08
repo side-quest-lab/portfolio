@@ -10,7 +10,13 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["gsap", "gsap/ScrollTrigger", "gsap/ScrollSmoother", "gsap/ScrollToPlugin"],
+      include: [
+        "gsap",
+        "gsap/ScrollTrigger",
+        "gsap/ScrollSmoother",
+        "gsap/ScrollToPlugin",
+        "gsap/Draggable",
+      ],
     },
   },
   app: {

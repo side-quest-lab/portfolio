@@ -51,8 +51,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" id="experience" class="py-16 md:py-24">
-    <UiSectionHeading number="03" title="EXPERIENCE" />
+  <section ref="sectionRef" id="experience">
+    <UiSectionHeading number="04" title="EXPERIENCE" />
 
     <div class="space-y-6">
       <div

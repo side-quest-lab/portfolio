@@ -19,6 +19,10 @@ export interface PersonInfo {
 export interface Skill {
   id: string;
   name: string;
+  icon: {
+    name: string;
+    color: string;
+  };
   category: SkillCategory;
   level: number;
   yearsOfExperience: number;
