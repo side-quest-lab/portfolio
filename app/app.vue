@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap";
+import Draggable from "gsap/Draggable";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
@@ -21,14 +22,12 @@ useHead({
 });
 
 onMounted(() => {
-  gsap.registerPlugin(ScrollSmoother, ScrollTrigger, ScrollToPlugin);
+  gsap.registerPlugin(Draggable, ScrollSmoother, ScrollTrigger, ScrollToPlugin);
 });
 </script>
 
 <template>
   <UApp>
-    <LoadingScreen />
-
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

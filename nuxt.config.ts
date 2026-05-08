@@ -22,10 +22,4 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
-  site: {
-    name: "Chhunhak Chhoeung",
-    description:
-      "Mobile Application Developer specializing in React Native, Flutter, and modern web technologies.",
-    defaultLocale: "en",
-  },
 });
