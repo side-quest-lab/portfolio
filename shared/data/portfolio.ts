@@ -1,11 +1,25 @@
-import type { PortfolioData } from "../types";
+const data: PortfolioData = {
+  info: {
+    name: "",
+    firstName: "",
+    title: "",
+    tagline: "",
+    location: "",
+    email: "",
+    phone: "",
+    avatar: "",
+    bio: "",
+    resumeUrl: "",
+  },
 
-import info from "./info.json";
+  skills: [],
 
-const data = info as PortfolioData;
+  projects: [],
 
-export const personalInfo = data.personalInfo;
-export const skills = data.skills;
-export const projects = data.projects;
-export const experience = data.experience;
-export const socialLinks = data.socialLinks;
+  experience: [],
+
+  socialLinks: [],
+};
+
+export default data;
+export const { info, experience, projects, skills, socialLinks } = data;

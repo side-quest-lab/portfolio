@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { personalInfo, socialLinks } from "~~/shared/data/portfolio";
+import { info, socialLinks } from "#shared/data/portfolio";
 </script>
 
 <template>
@@ -10,10 +10,10 @@ import { personalInfo, socialLinks } from "~~/shared/data/portfolio";
       </h2>
 
       <a
-        :href="`mailto:${personalInfo.email}`"
+        :href="`mailto:${info.email}`"
         class="inline-block text-lg md:text-xl text-primary hover:text-primary-400 transition-colors font-dm-sans mb-12"
       >
-        {{ personalInfo.email }}
+        {{ info.email }}
       </a>
 
       <div class="flex items-center gap-6 mb-12">
@@ -33,7 +33,7 @@ import { personalInfo, socialLinks } from "~~/shared/data/portfolio";
         </a>
       </div>
 
-      <p class="text-sm text-foreground/40 font-dm-sans">&copy; 2026 {{ personalInfo.name }}</p>
+      <p class="text-sm text-foreground/40 font-dm-sans">&copy; 2026 {{ info.name }}</p>
     </div>
   </footer>
 </template>

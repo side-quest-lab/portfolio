@@ -1,4 +1,9 @@
-export interface PersonalInfo {
+export type SkillCategory = "mobile" | "frontend" | "backend" | "database" | "devops" | "tools";
+export type ProjectCategory = "mobile" | "web";
+export type SocialPlatform = "LinkedIn" | "GitHub" | "Upwork" | "X" | "Email";
+export type SocialIcon = "linkedin" | "github" | "upwork" | "twitter" | "mail";
+
+export interface PersonInfo {
   name: string;
   firstName: string;
   title: string;
@@ -14,7 +19,7 @@ export interface PersonalInfo {
 export interface Skill {
   id: string;
   name: string;
-  category: string;
+  category: SkillCategory;
   level: number;
   yearsOfExperience: number;
 }
@@ -29,9 +34,9 @@ export interface Project {
   liveUrl: string;
   githubUrl: string;
   featured: boolean;
-  category: string;
+  category: ProjectCategory;
   startDate: string;
-  endDate: string;
+  endDate: string | "current";
   achievements: string[];
 }
 
@@ -41,7 +46,7 @@ export interface Experience {
   position: string;
   location: string;
   startDate: string;
-  endDate?: string;
+  endDate?: string; // optional — current job has no endDate
   description: string;
   technologies: string[];
   logo: string;
@@ -49,14 +54,14 @@ export interface Experience {
 }
 
 export interface SocialLink {
-  platform: string;
+  platform: SocialPlatform;
   url: string;
-  icon: string;
+  icon: SocialIcon;
   username: string;
 }
 
 export interface PortfolioData {
-  personalInfo: PersonalInfo;
+  info: PersonInfo;
   skills: Skill[];
   projects: Project[];
   experience: Experience[];

@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <div class="mb-8 md:mb-12">
-    <span class="font-space-grotesk text-sm font-medium text-foreground/30 font-dm-mono">
+    <span class="text-sm font-medium text-foreground/30 font-dm-mono">
       {{ number }}
     </span>
     <h2 class="font-space-grotesk text-3xl md:text-4xl font-bold text-foreground mt-2">

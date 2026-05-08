@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { projects } from "~~/shared/data/portfolio";
+import { projects } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
@@ -30,10 +30,10 @@ onBeforeUnmount(() => {
 
 <template>
   <section ref="sectionRef" id="work" class="py-16 md:py-24">
-    <SectionHeading number="03" title="FEATURED WORK" />
+    <UiSectionHeading number="02" title="FEATURED WORK" />
 
     <div class="space-y-6">
-      <ProjectCard
+      <FeaturesProjectsCard
         v-for="(project, index) in projects"
         :key="project.id"
         :project="project"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { personalInfo } from "~~/shared/data/portfolio";
+import { info } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
@@ -41,21 +41,21 @@ onBeforeUnmount(() => {
 
 <template>
   <section ref="sectionRef" id="about" class="py-16 md:py-24">
-    <span class="font-space-grotesk text-sm text-foreground/30 font-dm-mono block mb-4"> 06 </span>
+    <span class="text-sm text-foreground/30 font-dm-mono block mb-4"> 05 </span>
 
     <h2
       class="about-heading font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-foreground max-w-3xl leading-tight mb-8"
     >
-      THE DEVELOPER BEHIND THE APPS.
+      {{ info.tagline }}
     </h2>
 
     <div class="about-content max-w-2xl">
       <p class="text-foreground/60 font-dm-sans text-base md:text-lg leading-relaxed mb-8">
-        {{ personalInfo.bio }}
+        {{ info.bio }}
       </p>
 
       <a
-        :href="personalInfo.resumeUrl"
+        :href="info.resumeUrl"
         download
         class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-600 text-white font-space-grotesk font-medium rounded-lg transition-colors"
       >

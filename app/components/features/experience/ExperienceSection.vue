@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { experience } from "~~/shared/data/portfolio";
+import { experience } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
 
 <template>
   <section ref="sectionRef" id="experience" class="py-16 md:py-24">
-    <SectionHeading number="04" title="EXPERIENCE" />
+    <UiSectionHeading number="03" title="EXPERIENCE" />
 
     <div class="space-y-6">
       <div
@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
         </p>
 
         <div class="flex flex-wrap gap-2">
-          <TechPill v-for="tech in exp.technologies" :key="tech" :name="tech" />
+          <UiTechPill v-for="tech in exp.technologies" :key="tech" :name="tech" />
         </div>
       </div>
     </div>

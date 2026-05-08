@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { skills } from "~~/shared/data/portfolio";
+import { skills } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
 
 <template>
   <section ref="sectionRef" class="py-16 md:py-24">
-    <SectionHeading number="05" title="SKILLS & EXPERTISE" />
+    <UiSectionHeading number="04" title="SKILLS & EXPERTISE" />
 
     <div class="space-y-10">
       <div v-for="group in groupedSkills" :key="group.category" class="skill-category">
@@ -64,7 +64,7 @@ onBeforeUnmount(() => {
         </h3>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          <SkillCard v-for="skill in group.skills" :key="skill.id" :skill="skill" />
+          <FeaturesSkillsCard v-for="skill in group.skills" :key="skill.id" :skill="skill" />
         </div>
       </div>
     </div>

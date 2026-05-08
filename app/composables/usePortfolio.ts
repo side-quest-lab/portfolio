@@ -1,8 +1,8 @@
-import { personalInfo, skills, projects, experience, socialLinks } from "~~/shared/data/portfolio";
+import { info, skills, projects, experience, socialLinks } from "#shared/data/portfolio";
 
 export function usePortfolio() {
   return {
-    personalInfo: computed(() => personalInfo),
+    info: computed(() => info),
     skills: computed(() => skills),
     projects: computed(() => projects),
     experience: computed(() => experience),

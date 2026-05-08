@@ -2,16 +2,22 @@
 
 <template>
   <div class="max-w-7xl mx-auto">
-    <HeroSection />
-    <SectionDivider />
-    <CompaniesSection />
-    <SectionDivider />
-    <ProjectsSection />
-    <SectionDivider />
-    <ExperienceSection />
-    <SectionDivider />
-    <SkillsSection />
-    <SectionDivider />
-    <AboutSection />
+    <FeaturesHeroSection />
+
+    <UiSectionDivider />
+
+    <FeaturesAboutSection />
+
+    <UiSectionDivider />
+
+    <FeaturesProjectsSection />
+
+    <UiSectionDivider />
+
+    <FeaturesExperienceSection />
+
+    <UiSectionDivider />
+
+    <FeaturesSkillsSection />
   </div>
 </template>
