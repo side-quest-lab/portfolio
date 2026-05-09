@@ -1,6 +1,6 @@
-# Chhunhak Chhoeung — Portfolio
+# Portfolio
 
-A modern, immersive portfolio website built with **Nuxt 4**, **Vue 3**, and **Tailwind CSS v4**. Showcasing mobile application development expertise with a cosmic, space-inspired dark theme.
+A modern, immersive portfolio website built with **Nuxt 4**, **Vue 3**, and **Tailwind CSS v4**. Featuring a cosmic, space-inspired dark theme with smooth GSAP-powered animations.
 
 ![Nuxt](https://img.shields.io/badge/Nuxt-4.x-00DC82?logo=nuxt.js)
 ![Vue](https://img.shields.io/badge/Vue-3.x-4FC08D?logo=vue.js)
@@ -9,14 +9,14 @@ A modern, immersive portfolio website built with **Nuxt 4**, **Vue 3**, and **Ta
 
 ## Overview
 
-This is the personal portfolio of **Chhunhak Chhoeung**, a Mobile Application Developer specializing in React Native, Flutter, and modern web technologies. The site features smooth GSAP-powered animations, a space-themed visual design, and responsive layouts.
+A portfolio template with smooth GSAP-powered animations, interactive drag-and-snap elements, a space-themed visual design, and responsive layouts. All personal content is centralized in a single data file for easy customization.
 
 ## Tech Stack
 
 - **Framework**: [Nuxt 4](https://nuxt.com/) with Vue 3
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (no `tailwind.config.js`, theme config via CSS `@theme`)
 - **UI Components**: [@nuxt/ui v4](https://ui.nuxt.com/)
-- **Animation**: [GSAP](https://gsap.com/) + ScrollTrigger + ScrollSmoother
+- **Animation**: [GSAP](https://gsap.com/) + Draggable + SplitText
 - **Utilities**: [VueUse](https://vueuse.org/), clsx, tailwind-merge
 - **Linting**: [oxlint](https://oxc.rs/docs/guide/usage/linter.html)
 - **Formatting**: [oxfmt](https://github.com/oxc-project/oxc)
@@ -28,7 +28,10 @@ This is the personal portfolio of **Chhunhak Chhoeung**, a Mobile Application De
 portfolio/
 ├── app/
 │   ├── assets/css/main.css      # Global styles & Tailwind v4 theme config
-│   ├── components/              # Vue components (auto-imported)
+│   ├── components/
+│   │   ├── features/            # Domain sections (hero, about, skills, projects, experience)
+│   │   ├── layout/              # AppHeader, AppFooter
+│   │   └── ui/                  # Reusable primitives (SectionHeading, MetricBadge, TechPill, DragSnapText)
 │   ├── composables/             # Vue composables (auto-imported)
 │   ├── layouts/
 │   │   └── default.vue          # Root layout
@@ -36,7 +39,7 @@ portfolio/
 │   │   ├── index.vue            # Home page
 │   │   ├── projects.vue         # Project listing
 │   │   └── projects/[id].vue    # Project detail
-│   ├── utils/                   # Helper utilities
+│   ├── utils/                   # Helper utilities (cn, clsx + tailwind-merge)
 │   └── app.vue                  # Root app wrapper
 ├── shared/
 │   ├── data/portfolio.ts        # Single source of truth for portfolio content
@@ -50,16 +53,16 @@ portfolio/
 
 ## Features
 
-- **Immersive Hero**: Video background with space/cosmic aesthetics
-- **Tech Marquee**: Animated scrolling technology stack
-- **About Section**: Personal bio and introduction
-- **Orbital Skills**: Interactive skill visualization
-- **Project Showcase**: Featured and categorized projects with links
-- **Experience Timeline**: Professional work history
-- **Contact Section**: Social links and contact information
-- **GSAP Scroll Animations**: Smooth scrolling and scroll-triggered animations
+- **Interactive Hero**: Video background with space/cosmic aesthetics, draggable canvas elements, and entrance animations
+- **DragSnapText**: GSAP-powered draggable text with snap-back animation, typing effect with synthesized key sounds, and sequential reactive messages
+- **About Section**: Personal bio, avatar, and resume download
+- **Skills Grid**: Categorized skills with proficiency levels and experience indicators
+- **Project Showcase**: Featured and categorized projects with cards, links, and detail pages
+- **Experience Timeline**: Professional work history with company logos and tech stacks
+- **Contact & Footer**: Social links and contact information
+- **GSAP Animations**: Drag-and-drop, SplitText typing effects, scroll-triggered animations
 - **Responsive Design**: Optimized for all screen sizes
-- **Dark Theme**: Always dark mode with custom color palette
+- **Dark Theme**: Always dark mode with custom cosmic color palette
 
 ## Getting Started
 
@@ -142,14 +145,10 @@ Theme configuration is located in `app/assets/css/main.css` using Tailwind CSS v
 
 - **Sans**: Inter / Geist
 - **Heading**: Space Grotesk
-- **Mono**: JetBrains Mono / Geist Mono
+- **Mono**: JetBrains Mono / Geist Mono / DM Mono
 
 Loaded via `@nuxt/fonts` (configured in CSS `@theme static`).
 
 ## License
 
-Private — All rights reserved.
-
----
-
-Built with passion by **Chhunhak Chhoeung**
+[MIT License](LICENSE)
