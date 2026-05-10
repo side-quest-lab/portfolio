@@ -1,7 +1,15 @@
 <script lang="ts">
-interface DragSnapTaxtProps {
+interface DragSnapTextProps {
   /** The text to display */
-  text: string;
+  text?: string;
+  /** Whether to show the grid overlay. Defaults to true */
+  showGrid?: boolean;
+  /** Array of typing messages to cycle through */
+  typingMessages: string[];
+}
+
+export interface DragSnapTextSlots {
+  default(props: {}): any;
 }
 </script>
 
@@ -12,32 +20,26 @@ import SplitText from "gsap/SplitText";
 
 import { info } from "#shared/data/portfolio";
 
-const props = defineProps<DragSnapTaxtProps>();
+const props = withDefaults(defineProps<DragSnapTextProps>(), {
+  showGrid: true,
+});
+const slots = defineSlots<DragSnapTextSlots>();
 
 const { playKeySound } = useTypingSound();
 
-const typingMessages = [
-  "Hey... that tickles",
-  "Okay that was NOT an accident",
-  "Bro my pixels are CRYING right now",
-  "Please... I just aligned everything",
-  "I give up... do whatever you want",
-  "Wait you're actually still going?",
-  "The layout is literally shaking rn",
-  "This is personal at this point",
-  "I'm telling the other components",
-  "...I'll just rebuild it tomorrow",
-];
-
 const messageIndex = ref(0);
-const typingMessage = computed(() => typingMessages[messageIndex.value % typingMessages.length]);
+const typingMessage = computed(
+  () => props.typingMessages[messageIndex.value % props.typingMessages.length],
+);
 
 const dragTargetEl = useTemplateRef("drag-target");
 const gridOverlayEl = useTemplateRef("grid-overlay");
 const gridAligningOverlayEl = useTemplateRef("grid-aligning-overlay");
-const cursorTipEl = useTemplateRef("cursor-tip");
-const typingEl = useTemplateRef("typing");
-const typingTextEl = useTemplateRef("typing-text");
+const cursorTipRef = ref<{
+  cursorTipEl: HTMLElement | null;
+  typingEl: HTMLElement | null;
+  typingTextEl: HTMLElement | null;
+} | null>(null);
 
 function relBounding(source: DOMRect, target: DOMRect, offsetX = 0, offsetY = 0) {
   return {
@@ -53,108 +55,113 @@ function centerOffset(source: DOMRect, target: DOMRect) {
 let ctx: gsap.Context | undefined;
 
 onMounted(() => {
-  if (dragTargetEl.value && gridOverlayEl.value && cursorTipEl.value) {
-    ctx = gsap.context(() => {
-      gsap.to(gridOverlayEl.value, {
-        opacity: 1,
-      });
+  const tip = cursorTipRef.value;
+  if (!dragTargetEl.value || !gridOverlayEl.value || !tip?.cursorTipEl) return;
 
-      gsap.set(gridAligningOverlayEl.value, {
-        display: "none",
-      });
+  ctx = gsap.context(() => {
+    if (props.showGrid) {
+      gsap.to(gridOverlayEl.value, { opacity: 1 });
+    }
 
-      Draggable.create(dragTargetEl.value, {
-        type: "x,y",
-        bounds: "body",
-        inertia: true,
-        dragResistance: 0.5,
-        onDragStart() {
+    gsap.set(gridAligningOverlayEl.value, {
+      display: "none",
+    });
+
+    Draggable.create(dragTargetEl.value, {
+      type: "x,y",
+      bounds: "body",
+      inertia: true,
+      dragResistance: 0.5,
+      onDragStart() {
+        if (props.showGrid) {
           gsap.to(gridOverlayEl.value, { opacity: 0 });
-        },
-        onThrowComplete() {
-          const split = SplitText.create(typingTextEl.value, { type: "chars" });
+        }
+      },
+      onThrowComplete() {
+        const split = SplitText.create(tip.typingTextEl, { type: "chars" });
 
-          gsap.set(typingEl.value, { opacity: 0 });
+        gsap.set(tip.typingEl, { opacity: 0 });
 
-          const tl = gsap.timeline();
+        const tl = gsap.timeline();
 
-          tl.to(cursorTipEl.value, {
-            ...centerOffset(
-              dragTargetEl.value!.getBoundingClientRect(),
-              cursorTipEl.value!.getBoundingClientRect(),
-            ),
-            duration: 1,
-          });
+        tl.to(tip.cursorTipEl, {
+          ...centerOffset(
+            dragTargetEl.value!.getBoundingClientRect(),
+            tip.cursorTipEl!.getBoundingClientRect(),
+          ),
+          duration: 1,
+        });
 
-          tl.to(cursorTipEl.value, {
-            x: (_, target) =>
-              centerOffset(
-                gridOverlayEl.value!.getBoundingClientRect(),
-                target.getBoundingClientRect(),
-              ).x,
-            y: (_, target) =>
-              centerOffset(
-                gridOverlayEl.value!.getBoundingClientRect(),
-                target.getBoundingClientRect(),
-              ).y,
-            duration: 0.3,
-          });
+        tl.to(tip.cursorTipEl, {
+          x: (_, target) =>
+            centerOffset(
+              gridOverlayEl.value!.getBoundingClientRect(),
+              target.getBoundingClientRect(),
+            ).x,
+          y: (_, target) =>
+            centerOffset(
+              gridOverlayEl.value!.getBoundingClientRect(),
+              target.getBoundingClientRect(),
+            ).y,
+          duration: 0.3,
+        });
 
-          tl.to(dragTargetEl.value, { x: 0, y: 0, duration: 0.3 });
+        tl.to(dragTargetEl.value, { x: 0, y: 0, duration: 0.3 });
 
+        tl.fromTo(
+          gridAligningOverlayEl.value,
+          {
+            display: "block",
+            opacity: 1,
+          },
+          {
+            opacity: 0,
+            delay: 0.5,
+          },
+        );
+
+        tl.to(tip.typingEl, {
+          opacity: 1,
+        });
+
+        split.chars.forEach((char) => {
           tl.fromTo(
-            gridAligningOverlayEl.value,
+            char,
+            { autoAlpha: 0, display: "none" },
             {
-              display: "block",
-              opacity: 1,
-            },
-            {
-              opacity: 0,
-              delay: 0.5,
+              display: "inline-block",
+              autoAlpha: 1,
+              duration: 0.05,
+              onComplete: () => playKeySound(),
             },
           );
+        });
 
-          tl.to(typingEl.value, {
-            opacity: 1,
-          });
+        tl.to(tip.typingEl, {
+          opacity: 0,
+          delay: 1,
+        });
 
-          split.chars.forEach((char) => {
-            tl.fromTo(
-              char,
-              { autoAlpha: 0, display: "none" },
-              {
-                display: "inline-block",
-                autoAlpha: 1,
-                duration: 0.05,
-                onComplete: () => playKeySound(),
-              },
-            );
-          });
+        tl.to(tip.cursorTipEl, {
+          x: 0,
+          y: 0,
+        });
 
-          tl.to(typingEl.value, {
-            opacity: 0,
-            delay: 1,
-          });
+        tl.to(gridAligningOverlayEl.value, {
+          display: "none",
+        });
 
-          tl.to(cursorTipEl.value, {
-            x: 0,
-            y: 0,
-          });
-
-          tl.to(gridAligningOverlayEl.value, {
-            display: "none",
-          });
-
+        if (props.showGrid) {
           tl.to(gridOverlayEl.value, { opacity: 1 });
+        }
 
-          tl.call(() => {
-            messageIndex.value++;
-            split.revert();
-          });
-        },
-      });
+        tl.call(() => {
+          messageIndex.value++;
+          split.revert();
+        });
+      },
     });
-  }
+  });
 });
 
 onBeforeUnmount(() => {
@@ -165,10 +172,15 @@ onBeforeUnmount(() => {
 <template>
   <div class="relative">
     <div ref="drag-target" class="w-fit uppercase">
-      {{ props.text }}
+      <slot>
+        <span v-if="props.text !== undefined && props.text !== null">
+          {{ props.text }}
+        </span>
+      </slot>
     </div>
 
     <div
+      v-if="props.showGrid"
       ref="grid-overlay"
       class="p-1 border border-dashed border-muted absolute inset-0 -z-1 opacity-0"
     >
@@ -195,23 +207,10 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <div ref="cursor-tip" class="absolute top-[-100vh] left-[-100vw]">
-      <svg width="16" height="20" viewBox="0 0 14 18" fill="none">
-        <path d="M0.5 0.5L13 10.5H5.5L2.5 17.5L0.5 0.5Z" class="fill-primary" />
-      </svg>
-
-      <div class="mx-4 space-y-1 text-background font-bold">
-        <div class="w-fit px-1 py-0.5 bg-primary text-xs font-space-grotesk rounded-xs">
-          {{ info.firstName }} {{ info.lastName }}
-        </div>
-
-        <div
-          ref="typing"
-          class="w-fit px-2.5 py-0.5 bg-primary text-sm rounded-b-lg rounded-e-lg font-dm-mono"
-        >
-          <span ref="typing-text">{{ typingMessage }}</span>
-        </div>
-      </div>
-    </div>
+    <UiCursorTip
+      ref="cursorTipRef"
+      :name="`${info.firstName} ${info.lastName}`"
+      :message="typingMessage"
+    />
   </div>
 </template>
