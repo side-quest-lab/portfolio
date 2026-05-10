@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="max-w-7xl mx-auto">
+  <div>
     <FeaturesHeroSection />
 
     <UiSectionDivider />

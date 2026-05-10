@@ -28,9 +28,8 @@ Stack: **Nuxt 4 + Vue 3** with **Tailwind CSS v4**.
 - **Content**: All portfolio data lives in `shared/data/portfolio.ts` (single source of truth). Types in `shared/types/index.ts`.
 - **Path alias**: `~/` maps to `./app/*` (Nuxt convention). `~~/` maps to project root.
 - **File-based routing** (`app/pages/`):
-  - `/` — home page (`app/pages/index.vue`).
-  - `/projects` — project listing page (`app/pages/projects.vue`).
-  - `/projects/[id]` — dynamic project detail page (`app/pages/projects/[id].vue`).
+  - `/` — single-page portfolio with all sections composed inline
+  - `FeaturesProjectsSection` and other feature sections are composed directly on the home page
 - **Components**: Auto-imported from `app/components/`. Organized by domain:
   - `app/components/ui/` — reusable primitives (animated, display, feedback, video).
   - `app/components/features/` — domain sections (hero, about, projects, project-detail, experience, contact).
@@ -66,6 +65,6 @@ Custom animations: `float`, `pulse-slow`, `shimmer`, `fade-in`, `slide-up`, `neb
 - **Slots**: Use `<slot />` instead of `children` prop.
 - **Props**: Define with `defineProps<Props>()` and `withDefaults()`.
 - **GSAP**: Register plugins in `onMounted()` or `app.vue`. Use template refs for DOM access.
-- Video assets in `public/videos/` (`blackhole_center.webm`, `blackhole_top.webm`, `text-effect.webm`) are referenced by `VideoBackground` and the hero section.
-- The projects listing page (`/projects`) uses a green accent theme that differs from the cosmic/space theme on the home page.
+- Video assets are expected in `public/videos/` but this directory does not yet exist — create it if needed.
+- The projects section on the home page uses a green accent theme that differs from the cosmic/space theme.
 - **Linting**: oxlint with `oxlint.config.ts`. **Formatting**: oxfmt with `oxfmt.config.ts`.

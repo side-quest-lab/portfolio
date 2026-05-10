@@ -1,11 +1,10 @@
 export type SkillCategory = "mobile" | "frontend" | "backend" | "database" | "devops" | "tools";
 export type ProjectCategory = "mobile" | "web";
 export type SocialPlatform = "LinkedIn" | "GitHub" | "Upwork" | "X" | "Email";
-export type SocialIcon = "linkedin" | "github" | "upwork" | "twitter" | "mail";
 
 export interface PersonInfo {
-  name: string;
   firstName: string;
+  lastName: string;
   title: string;
   tagline: string;
   location: string;
@@ -60,7 +59,7 @@ export interface Experience {
 export interface SocialLink {
   platform: SocialPlatform;
   url: string;
-  icon: SocialIcon;
+  icon: string;
   username: string;
 }
 
