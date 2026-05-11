@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { info } from "#shared/data/portfolio";
 
-const typingMessages = [
-  "Hey... that tickles",
-  "Okay that was NOT an accident",
-  "Bro my pixels are CRYING right now",
-  "Please... I just aligned everything",
-  "I give up... do whatever you want",
-  "Wait you're actually still going?",
-  "The layout is literally shaking rn",
-  "This is personal at this point",
-  "I'm telling the other components",
-  "...I'll just rebuild it tomorrow",
+const messages = [
+  "Let's keep it centered... please!",
+  "Bruhh... stop breaking my layout.",
+  "Again?? We just fixed this.",
+  "I'm telling the CSS on you.",
+  "That's it. I'm locking position next update.",
+  "This is NOT a team-building exercise.",
+  "My alignment is crying right now.",
+  "Congratulations, you found the only interactive thing here.",
+  "The grid was perfectly fine before you showed up.",
+  "Error 404: patience not found.",
 ];
 </script>
 
@@ -24,9 +24,9 @@ const typingMessages = [
       NAVIGATING THE UNKNOWN, PIXEL BY PIXEL
     </p>
 
-    <UiDragSnapText :text="info.firstName" :typing-messages="typingMessages" />
+    <UiDragSnapText :text="info.firstName" :typing-messages="messages.slice(0, 5)" />
 
-    <UiDragSnapText :typing-messages="typingMessages">
+    <UiDragSnapText :typing-messages="messages.slice(5, 10)" :show-grid="false">
       <span class="text-transparent" style="-webkit-text-stroke: 1.5px var(--color-foreground)">
         {{ info.lastName }}
       </span>
