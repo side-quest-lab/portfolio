@@ -69,9 +69,13 @@ function typeMessage(onKeySound?: () => void) {
     display: "inline",
     autoAlpha: 1,
     duration: 0,
-    stagger: 0.05,
+    stagger: {
+      each: 0.05,
+      onComplete: function () {
+        onKeySound?.();
+      },
+    },
     onComplete: function () {
-      onKeySound?.();
       split.revert();
     },
   });
