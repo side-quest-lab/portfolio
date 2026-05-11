@@ -106,10 +106,6 @@ function scrollToSection(target: string) {
 onMounted(() => {
   updateTime();
   timeInterval = setInterval(updateTime, 1000);
-
-  if (mobileMenuRef.value) {
-    gsap.set(mobileMenuRef.value, { display: "none" });
-  }
 });
 
 onBeforeUnmount(() => {
@@ -159,7 +155,7 @@ onBeforeUnmount(() => {
       </UButton>
     </div>
 
-    <div ref="mobileMenuRef" class="lg:hidden w-screen h-screen fixed left-0 top-0 z-40">
+    <div ref="mobileMenuRef" class="hidden lg:hidden w-screen h-screen fixed left-0 top-0 z-40">
       <div
         class="menu-backdrop absolute inset-0 bg-background/95 backdrop-blur-lg"
         @click="toggleMenu"
