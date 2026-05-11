@@ -1,335 +1,49 @@
-const data: PortfolioData = {
-  info: {
-    firstName: "Sethy",
-    lastName: "rung",
-    title: "Developer",
-    tagline: "THE DEVELOPER BEHIND THE APPS.",
-    location: "Cambodia",
-    email: "chhunhak.chhoeung@gmail.com",
-    phone: "+855 96 86 69 888",
-    avatar: "/images/companies/profile-optimized.jpeg",
-    bio: "Passionate mobile developer with expertise in React Native, Flutter, and modern web technologies. I specialize in creating high-performance, user-centric mobile applications that solve real-world problems. With a strong foundation in both frontend and backend development, I bring a comprehensive approach to mobile application development.",
-    resumeUrl: "/resume/Chunhak.chhoeung_CV.docx",
-  },
+import type {
+  Bookmark,
+  Certification,
+  Experience,
+  Project,
+  SocialLink,
+  TechStack,
+  User,
+} from "#shared/types";
 
-  skills: [
+export const SOCIAL_LINKS: SocialLink[] = [];
+
+export const TECH_STACK: TechStack[] = [];
+
+export const EXPERIENCES: Experience[] = [];
+
+export const PROJECTS: Project[] = [];
+
+export const CERTIFICATIONS: Certification[] = [];
+
+export const BOOKMARKS: Bookmark[] = [];
+
+export const USER: User = {
+  firstName: "",
+  lastName: "",
+  displayName: "",
+  username: "",
+  gender: "non-binary",
+  pronouns: "",
+  bio: "",
+  flipSentences: [],
+  address: "",
+  phoneNumbers: [],
+  email: "",
+  website: "",
+  jobTitle: "",
+  jobs: [
     {
-      id: "1",
-      name: "React Native",
-      icon: { name: "i-simple-icons:react", color: "#61DAFB" },
-      category: "mobile",
-      level: 5,
-      yearsOfExperience: 6,
-    },
-    {
-      id: "3",
-      name: "React",
-      icon: { name: "i-simple-icons:react", color: "#61DAFB" },
-      category: "frontend",
-      level: 5,
-      yearsOfExperience: 4,
-    },
-    {
-      id: "5",
-      name: "TypeScript",
-      icon: { name: "i-simple-icons:typescript", color: "#3178C6" },
-      category: "frontend",
-      level: 4,
-      yearsOfExperience: 3,
-    },
-    {
-      id: "2",
-      name: "Flutter",
-      icon: { name: "i-simple-icons:flutter", color: "#02569B" },
-      category: "mobile",
-      level: 1,
-      yearsOfExperience: 1,
-    },
-    {
-      id: "7",
-      name: "Java",
-      icon: { name: "i-simple-icons:javascript", color: "#007396" },
-      category: "backend",
-      level: 3,
-      yearsOfExperience: 3,
-    },
-    {
-      id: "8",
-      name: "Kotlin",
-      icon: { name: "i-simple-icons:kotlin", color: "#7F52FF" },
-      category: "backend",
-      level: 3,
-      yearsOfExperience: 2,
-    },
-    {
-      id: "9",
-      name: "Spring Boot",
-      icon: { name: "i-simple-icons:springboot", color: "#6DB33F" },
-      category: "backend",
-      level: 3,
-      yearsOfExperience: 2,
-    },
-    {
-      id: "10",
-      name: "Python",
-      icon: { name: "i-simple-icons:python", color: "#3776AB" },
-      category: "backend",
-      level: 1,
-      yearsOfExperience: 1,
-    },
-    {
-      id: "12",
-      name: "PostgreSQL",
-      icon: { name: "i-simple-icons:postgresql", color: "#4169E1" },
-      category: "database",
-      level: 3,
-      yearsOfExperience: 2,
-    },
-    {
-      id: "13",
-      name: "Firebase",
-      icon: { name: "i-simple-icons:firebase", color: "#DD2C00" },
-      category: "backend",
-      level: 3,
-      yearsOfExperience: 4,
-    },
-    {
-      id: "14",
-      name: "AWS",
-      icon: { name: "i-simple-icons:amazonwebservices", color: "#232F3E" },
-      category: "devops",
-      level: 2,
-      yearsOfExperience: 1,
-    },
-    {
-      id: "15",
-      name: "Docker",
-      icon: { name: "i-simple-icons:docker", color: "#2496ED" },
-      category: "devops",
-      level: 3,
-      yearsOfExperience: 3,
-    },
-    {
-      id: "16",
-      name: "Git",
-      icon: { name: "i-simple-icons:git", color: "#F05032" },
-      category: "tools",
-      level: 5,
-      yearsOfExperience: 6,
-    },
-    {
-      id: "17",
-      name: "Ionic",
-      icon: { name: "i-simple-icons:ionic", color: "#3880FF" },
-      category: "mobile",
-      level: 3,
-      yearsOfExperience: 1,
+      title: "",
+      company: "",
+      website: "",
     },
   ],
-
-  projects: [
-    {
-      id: "1",
-      title: "CBC Mobile App",
-      description: "A full-featured CBC mobile application with real-time inventory management.",
-      longDescription:
-        "Developed a comprehensive CBC mobile application using React Native and Spring Boot. The app features Credit Report, secure payment processing, and an intuitive user interface. Implemented push notifications, in-app messaging, and advanced search capabilities.",
-      techStack: ["React Native", "Spring Boot", "PostgreSQL", "Firebase"],
-      imageUrl:
-        "https://play-lh.googleusercontent.com/p4wySI_U0TjYqCjgSTbugh58d9vO_EXANsdW5gUNZ23WmnELXmhCTcld3xEuYg8KrZ_u=w832-h470-rw",
-      liveUrl: "https://play.google.com/store/apps/details?id=com.mobile.cbc&hl=en-US&pli=1",
-      githubUrl: "https://github.com/infinityindex/ecommerce-mobile-app",
-      featured: true,
-      category: "mobile",
-      startDate: "2022-05",
-      endDate: "current",
-      achievements: [
-        "Fully functional mobile app with 50,000+ downloads",
-        "Implemented secure payment processing",
-        "User-friendly interface with intuitive navigation",
-      ],
-    },
-    {
-      id: "2",
-      title: "Health & Fitness Tracker",
-      description:
-        "AI-powered health and fitness tracking application with personalized workout plans.",
-      longDescription:
-        "Created an innovative health and fitness tracking application that leverages AI to provide personalized workout plans and nutrition recommendations. The app integrates with wearable devices and provides real-time health monitoring.",
-      techStack: ["Flutter", "Python", "TensorFlow", "PostgreSQL", "HealthKit"],
-      imageUrl: "/images/projects/fitness-tracker.jpg",
-      liveUrl: "https://apps.apple.com/us/app/fitness-tracker/id987654321",
-      githubUrl: "https://github.com/infinityindex/fitness-tracker",
-      featured: true,
-      category: "mobile",
-      startDate: "2022-09",
-      endDate: "2023-03",
-      achievements: ["10,000+ active users", "Featured on App Store", "95% user retention rate"],
-    },
-    {
-      id: "3",
-      title: "Social Media Platform",
-      description:
-        "Real-time social media platform with video streaming and messaging capabilities.",
-      longDescription:
-        "Built a real-time social media platform with advanced features including video streaming, instant messaging, and content discovery algorithms. Implemented WebSocket connections for real-time updates and optimized performance for high user concurrency.",
-      techStack: ["React Native", "Socket.io", "Express.js", "Redis", "WebRTC"],
-      imageUrl: "/images/projects/social-platform.jpg",
-      liveUrl: "https://apps.apple.com/us/app/social-platform/id456789123",
-      githubUrl: "https://github.com/infinityindex/social-platform",
-      featured: true,
-      category: "mobile",
-      startDate: "2023-04",
-      endDate: "2023-10",
-      achievements: [
-        "50,000+ downloads in first month",
-        "99.9% uptime",
-        "Advanced content moderation system",
-      ],
-    },
-    {
-      id: "4",
-      title: "Banking Mobile App",
-      description:
-        "Secure banking application with biometric authentication and financial management tools.",
-      longDescription:
-        "Developed a secure banking mobile application with advanced security features including biometric authentication, end-to-end encryption, and real-time fraud detection. The app provides comprehensive financial management tools and integrates with core banking systems.",
-      techStack: ["React Native", "Java Spring", "MySQL", "OAuth 2.0", "JWT"],
-      imageUrl: "/images/projects/banking-app.jpg",
-      liveUrl: "https://apps.apple.com/us/app/banking-app/id789123456",
-      githubUrl: "https://github.com/infinityindex/banking-app",
-      featured: true,
-      category: "mobile",
-      startDate: "2022-03",
-      endDate: "2022-08",
-      achievements: [
-        "Bank-grade security implemented",
-        "Reduced fraud by 60%",
-        "4.9-star rating with 50,000+ reviews",
-      ],
-    },
-    {
-      id: "5",
-      title: "Portfolio Website",
-      description: "Modern, responsive portfolio website built with Next.js and Tailwind CSS.",
-      longDescription:
-        "Created a modern, responsive portfolio website using Next.js 14 with App Router, TypeScript, and Tailwind CSS. Implemented smooth animations with Framer Motion, optimized performance, and ensured full accessibility compliance.",
-      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
-      imageUrl: "/images/projects/portfolio-website.jpg",
-      liveUrl: "https://chhunhak.dev",
-      githubUrl: "https://github.com/infinityindex/portfolio",
-      featured: true,
-      category: "web",
-      startDate: "2023-11",
-      endDate: "2023-12",
-      achievements: [
-        "100/100 Lighthouse score",
-        "Full accessibility compliance",
-        "Optimized for SEO",
-      ],
-    },
-  ],
-
-  experience: [
-    {
-      id: "1",
-      company: "Credit Bureau Cambodia",
-      position: "Mobile Developer",
-      location: "Phnom Penh, Cambodia",
-      startDate: "2022-05",
-      description:
-        "Mobile development team in creating enterprise-level mobile applications.  development and established best practices for mobile development.",
-      technologies: [
-        "React Native",
-        "Spring Boot",
-        "Java",
-        "Kotlin",
-        "DevOps",
-        "PostgreSQL",
-        "AWS",
-        "Docker",
-        "Git",
-        "Agile",
-        "ClickUp",
-        "Jira",
-      ],
-      logo: "https://play-lh.googleusercontent.com/os3hMmWj4w_skTqvPCOPsIyBknCrvmWn7PmV-6xGXvaZFBcB9nRl27bwFucM165V2u08fzc2-5tQmctoKlmV7g=w480-h960-rw",
-      website: "https://www.creditbureau.com.kh",
-    },
-    {
-      id: "2",
-      company: "Codingate Co., Ltd",
-      position: "Mobile Application Developer",
-      location: "Phnom Penh, Cambodia",
-      startDate: "2021-01",
-      endDate: "2022-05",
-      description:
-        "Developed and maintained multiple mobile applications for clients across various industries. Implemented real-time features and optimized app performance.",
-      technologies: ["React Native", "JavaScript", "Firebase", "Git", "Agile", "ClickUp"],
-      logo: "https://www.codingate.com/wp-content/uploads/2023/01/logo_cg-300x91.png",
-      website: "https://www.codingate.com",
-    },
-    {
-      id: "3",
-      company: "Nulo Lab Co., Ltd",
-      position: "Mobile Developer",
-      location: "Phnom Penh, Cambodia",
-      startDate: "2019-06",
-      endDate: "2021-01",
-      description:
-        "Worked on various mobile application projects, learning best practices and gaining experience in mobile development lifecycle.",
-      technologies: ["React Native", "TypeScript", "Laravel", "MySQL", "Git", "Agile"],
-      logo: "https://nulo.co.jp/wp-content/themes/nulo2024/lpja/img/share/logo.png",
-      website: "https://nulo.co.jp",
-    },
-    {
-      id: "4",
-      company: "Codingate Co., Ltd",
-      position: "Junior React-Native Developer",
-      location: "Phnom Penh, Cambodia",
-      startDate: "2018-01",
-      endDate: "2019-05",
-      description:
-        "Developed and maintained multiple mobile applications for clients across various industries.",
-      technologies: ["React Native", "JavaScript", "TypeScript", "Git", "Agile"],
-      logo: "https://www.codingate.com/wp-content/uploads/2023/01/logo_cg-300x91.png",
-      website: "https://www.codingate.com",
-    },
-  ],
-
-  socialLinks: [
-    {
-      platform: "LinkedIn",
-      url: "https://www.linkedin.com/in/chhunhak-chhoeung/",
-      icon: "i-simple-icons:linkedin",
-      username: "chhunhak-chhoeung",
-    },
-    {
-      platform: "GitHub",
-      url: "https://github.com/infinityindex",
-      icon: "i-simple-icons:github",
-      username: "infinityindex",
-    },
-    {
-      platform: "Upwork",
-      url: "https://www.upwork.com/freelancers/~016476afaef6664454",
-      icon: "i-simple-icons:upwork",
-      username: "chhunhak-chhoeung",
-    },
-    {
-      platform: "X",
-      url: "https://twitter.com/chhunhakdev",
-      icon: "i-simple-icons:twitter",
-      username: "chhunhakdev",
-    },
-    {
-      platform: "Email",
-      url: "mailto:chhunhak.chhoeung@example.com",
-      icon: "i-simple-icons:mail",
-      username: "chhunhak.chhoeung@example.com",
-    },
-  ],
+  about: "",
+  avatar: "",
+  timeZone: "",
+  keywords: [],
+  dateCreated: "",
 };
-
-export default data;
-export const { info, experience, projects, skills, socialLinks } = data;

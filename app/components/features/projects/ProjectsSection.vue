@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { projects } from "#shared/data/portfolio";
+import { PROJECTS } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
@@ -34,7 +34,7 @@ onBeforeUnmount(() => {
 
     <div class="space-y-6">
       <FeaturesProjectsCard
-        v-for="(project, index) in projects"
+        v-for="(project, index) in PROJECTS"
         :key="project.id"
         :project="project"
         :index="index"

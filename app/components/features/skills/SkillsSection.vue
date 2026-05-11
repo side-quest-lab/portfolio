@@ -1,29 +1,19 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { skills } from "#shared/data/portfolio";
+import { TECH_STACK } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
 
-const categoryLabels: Record<string, string> = {
-  mobile: "Mobile",
-  frontend: "Frontend",
-  backend: "Backend",
-  database: "Database",
-  devops: "DevOps",
-  tools: "Tools",
-};
-
 const groupedSkills = computed(() => {
-  const groups: Record<string, typeof skills> = {};
-  for (const skill of skills) {
-    const cat = skill.category;
-    if (!groups[cat]) groups[cat] = [];
-    groups[cat].push(skill);
+  const groups = {} as Record<TechStack["category"], TechStack[]>;
+  for (const skill of TECH_STACK) {
+    const { category } = skill;
+    if (!groups[skill.category]) groups[category] = [];
+    groups[category].push(skill);
   }
   return Object.entries(groups).map(([category, items]) => ({
     category,
-    label: categoryLabels[category] ?? category,
     skills: items,
   }));
 });
@@ -60,11 +50,11 @@ onBeforeUnmount(() => {
         <h3
           class="font-space-grotesk text-sm font-medium text-foreground/40 uppercase tracking-wider mb-4"
         >
-          {{ group.label }}
+          {{ group.category }}
         </h3>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          <FeaturesSkillsCard v-for="skill in group.skills" :key="skill.id" :skill="skill" />
+          <FeaturesSkillsCard v-for="skill in group.skills" :key="skill.key" :skill="skill" />
         </div>
       </div>
     </div>

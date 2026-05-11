@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { info } from "#shared/data/portfolio";
+import { USER } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
@@ -46,21 +46,22 @@ onBeforeUnmount(() => {
     <h2
       class="about-heading font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-foreground max-w-3xl leading-tight mb-8"
     >
-      {{ info.tagline }}
+      {{ USER.bio }}
     </h2>
 
     <div class="about-content max-w-2xl">
-      <p class="text-foreground/60 font-dm-sans text-base md:text-lg leading-relaxed mb-8">
-        {{ info.bio }}
+      <p
+        class="text-foreground/60 font-dm-sans text-base md:text-lg leading-relaxed mb-8 whitespace-pre-line"
+      >
+        {{ USER.about }}
       </p>
 
       <a
-        :href="info.resumeUrl"
-        download
+        :href="`mailto:${decodeEmail(USER.email)}`"
         class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-600 text-white font-space-grotesk font-medium rounded-lg transition-colors"
       >
-        <UIcon name="i-lucide-download" class="w-4 h-4" />
-        DOWNLOAD RESUME
+        <UIcon name="i-lucide-mail" class="w-4 h-4" />
+        GET IN TOUCH
       </a>
     </div>
   </section>

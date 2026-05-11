@@ -1,11 +1,21 @@
-import { info, skills, projects, experience, socialLinks } from "#shared/data/portfolio";
+import {
+  BOOKMARKS,
+  CERTIFICATIONS,
+  EXPERIENCES,
+  PROJECTS,
+  SOCIAL_LINKS,
+  TECH_STACK,
+  USER,
+} from "#shared/data/portfolio";
 
 export function usePortfolio() {
   return {
-    info: computed(() => info),
-    skills: computed(() => skills),
-    projects: computed(() => projects),
-    experience: computed(() => experience),
-    socialLinks: computed(() => socialLinks),
+    user: computed(() => USER),
+    techStack: computed(() => TECH_STACK),
+    projects: computed(() => PROJECTS),
+    experiences: computed(() => EXPERIENCES),
+    socialLinks: computed(() => SOCIAL_LINKS),
+    certifications: computed(() => CERTIFICATIONS),
+    bookmarks: computed(() => BOOKMARKS),
   };
 }

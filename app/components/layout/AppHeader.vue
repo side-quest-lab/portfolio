@@ -2,7 +2,7 @@
 import gsap from "gsap";
 import ScrollSmoother from "gsap/ScrollSmoother";
 
-import { info } from "#shared/data/portfolio";
+import { USER } from "#shared/data/portfolio";
 
 const currentTime = ref("");
 
@@ -121,7 +121,7 @@ onBeforeUnmount(() => {
         to="/"
         class="font-space-grotesk text-lg font-bold tracking-tight text-foreground hover:text-primary transition-colors"
       >
-        {{ info.firstName }}
+        {{ USER.firstName }}
       </NuxtLink>
 
       <div class="hidden md:flex items-center gap-1 text-sm text-foreground/60 font-dm-mono">

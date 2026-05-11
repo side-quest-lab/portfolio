@@ -19,7 +19,7 @@ export interface DragSnapTextSlots {
 import gsap from "gsap";
 import Draggable from "gsap/Draggable";
 
-import { info } from "#shared/data/portfolio";
+import { USER } from "#shared/data/portfolio";
 
 const props = withDefaults(defineProps<DragSnapTextProps>(), {
   overlay: true,
@@ -106,7 +106,7 @@ onBeforeUnmount(() => {
 
     <CursorTip
       ref="cursor-tip"
-      :name="`${info.firstName} ${info.lastName}`"
+      :name="`${USER.firstName} ${USER.lastName}`"
       :message="typingMessage"
     />
   </div>

@@ -1,72 +1,99 @@
-export type SkillCategory = "mobile" | "frontend" | "backend" | "database" | "devops" | "tools";
-export type ProjectCategory = "mobile" | "web";
-export type SocialPlatform = "LinkedIn" | "GitHub" | "Upwork" | "X" | "Email";
-
-export interface PersonInfo {
-  firstName: string;
-  lastName: string;
+export interface SocialLink {
+  icon: string;
   title: string;
-  tagline: string;
-  location: string;
-  email: string;
-  phone: string;
-  avatar: string;
-  bio: string;
-  resumeUrl: string;
+  subtitle?: string;
+  href: string;
 }
 
-export interface Skill {
+export interface TechStack {
+  key: string;
+  icon: string;
+  color: string;
+  title: string;
+  href: string;
+  category: "Frontend" | "Backend" | "Mobile" | "Database" | "Tools";
+}
+
+export interface ExperiencePosition {
   id: string;
-  name: string;
-  icon: {
-    name: string;
-    color: string;
+  title: string;
+  employmentPeriod: {
+    start: string;
+    end?: string;
   };
-  category: SkillCategory;
-  level: number;
-  yearsOfExperience: number;
+  employmentType?: string;
+  icon: string;
+  description?: string;
+  skills?: string[];
+  isExpanded?: boolean;
+}
+
+export interface Experience {
+  id: string;
+  companyName: string;
+  companyLogo?: string;
+  companyWebsite?: string;
+  positions: ExperiencePosition[];
+  isCurrentEmployer?: boolean;
 }
 
 export interface Project {
   id: string;
   title: string;
-  description: string;
-  longDescription: string;
-  techStack: string[];
-  imageUrl: string;
-  liveUrl: string;
-  githubUrl: string;
-  featured: boolean;
-  category: ProjectCategory;
-  startDate: string;
-  endDate: string | "current";
-  achievements: string[];
+  period: {
+    start: string;
+    end?: string;
+  };
+  link?: string;
+  repo: string;
+  stacks: string[];
+  description?: string;
+  logo?: string;
+  isExpanded?: boolean;
 }
 
-export interface Experience {
-  id: string;
-  company: string;
-  position: string;
-  location: string;
-  startDate: string;
-  endDate?: string; // optional — current job has no endDate
-  description: string;
-  technologies: string[];
-  logo: string;
-  website: string;
+export interface Certification {
+  title: string;
+  issuer: string;
+  issuerIconName?: string;
+  issueDate: string;
+  credentialID?: string;
+  credentialURL: string;
 }
 
-export interface SocialLink {
-  platform: SocialPlatform;
+export interface Bookmark {
+  title: string;
   url: string;
-  icon: string;
-  username: string;
+  author?: string;
+  iconName?: string;
+  bookmarkedAt: string;
 }
 
-export interface PortfolioData {
-  info: PersonInfo;
-  skills: Skill[];
-  projects: Project[];
-  experience: Experience[];
-  socialLinks: SocialLink[];
+export interface User {
+  firstName: string;
+  lastName: string;
+  displayName: string;
+  username: string;
+  gender: "male" | "female" | "non-binary";
+  pronouns: string;
+  bio: string;
+  flipSentences: string[];
+  address: string;
+  /**base64 encoded */
+  phoneNumbers: string[];
+  /**base64 encoded */
+  email: string;
+  website: string;
+  jobTitle: string;
+  jobs: Array<{
+    title: string;
+    company: string;
+    website: string;
+    experienceId?: string;
+  }>;
+  about: string;
+  avatar: string;
+  timeZone: string;
+  keywords: string[];
+  dateCreated: string;
 }

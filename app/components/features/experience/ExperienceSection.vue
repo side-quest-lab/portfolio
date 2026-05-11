@@ -1,31 +1,9 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { experience } from "#shared/data/portfolio";
+import { EXPERIENCES } from "#shared/data/portfolio";
 
 const sectionRef = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
-
-function formatDate(date: string): string {
-  if (date === "current") return "Present";
-  const parts = date.split("-");
-  const year = parts[0] ?? "";
-  const month = parts[1] ?? "01";
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  return `${months[Number.parseInt(month) - 1]} ${year}`;
-}
 
 onMounted(() => {
   if (!sectionRef.value) return;
@@ -56,38 +34,55 @@ onBeforeUnmount(() => {
 
     <div class="space-y-6">
       <div
-        v-for="exp in experience"
+        v-for="exp in EXPERIENCES"
         :key="exp.id"
         class="experience-card bg-foreground/5 rounded-xl p-6 md:p-8 border border-foreground/5 hover:border-foreground/10 transition-colors"
       >
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-          <div class="flex items-center gap-3">
-            <img
-              :src="exp.logo"
-              :alt="exp.company"
-              class="w-8 h-8 rounded object-contain"
-              loading="lazy"
-            />
-            <div>
-              <h3 class="font-space-grotesk font-bold text-foreground text-lg">
-                {{ exp.company }}
-              </h3>
-              <p class="text-primary font-medium text-sm">{{ exp.position }}</p>
+        <div v-for="position in exp.positions" :key="position.id" class="mb-6 last:mb-0">
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded flex items-center justify-center bg-foreground/10">
+                <UIcon :name="position.icon" class="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                <h3 class="font-space-grotesk font-bold text-foreground text-lg">
+                  {{ exp.companyName }}
+                  <a
+                    v-if="exp.companyWebsite"
+                    :href="exp.companyWebsite"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-primary/60 hover:text-primary transition-colors"
+                  >
+                    <UIcon name="i-lucide-external-link" class="w-3 h-3 inline-block ml-1" />
+                  </a>
+                </h3>
+                <p class="text-primary font-medium text-sm">{{ position.title }}</p>
+                <span
+                  v-if="position.employmentType"
+                  class="text-xs text-foreground/40 font-dm-mono"
+                >
+                  {{ position.employmentType }}
+                </span>
+              </div>
             </div>
+
+            <span class="text-sm text-foreground/40 font-dm-mono whitespace-nowrap">
+              {{ position.employmentPeriod.start }} —
+              {{ position.employmentPeriod.end ?? "Present" }}
+            </span>
           </div>
 
-          <span class="text-sm text-foreground/40 font-dm-mono whitespace-nowrap">
-            {{ formatDate(exp.startDate) }} —
-            {{ exp.endDate ? formatDate(exp.endDate) : "Present" }}
-          </span>
-        </div>
+          <p
+            v-if="position.description"
+            class="text-foreground/60 font-dm-sans text-sm md:text-base mb-4 whitespace-pre-line"
+          >
+            {{ position.description }}
+          </p>
 
-        <p class="text-foreground/60 font-dm-sans text-sm md:text-base mb-4">
-          {{ exp.description }}
-        </p>
-
-        <div class="flex flex-wrap gap-2">
-          <UiTechPill v-for="tech in exp.technologies" :key="tech" :name="tech" />
+          <div v-if="position.skills" class="flex flex-wrap gap-2">
+            <UiTechPill v-for="tech in position.skills" :key="tech" :name="tech" />
+          </div>
         </div>
       </div>
     </div>

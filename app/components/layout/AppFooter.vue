@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { info, socialLinks } from "#shared/data/portfolio";
+import { SOCIAL_LINKS, USER } from "#shared/data/portfolio";
 </script>
 
 <template>
@@ -14,24 +14,24 @@ import { info, socialLinks } from "#shared/data/portfolio";
         >
       </h2>
 
-      <a :href="`mailto:${info.email}`" class="inline-block text-sm font-dm-mono">
-        {{ info.email }}
+      <a :href="`mailto:${decodeEmail(USER.email)}`" class="inline-block text-sm font-dm-mono">
+        {{ decodeEmail(USER.email) }}
       </a>
 
       <div class="flex items-center gap-4">
         <UButton
-          v-for="link in socialLinks"
-          :key="link.platform"
+          v-for="link in SOCIAL_LINKS"
+          :key="link.title"
           :icon="link.icon"
           variant="link"
-          :to="link.url"
+          :to="link.href"
           target="_blank"
           class="text-foreground"
         />
       </div>
 
       <p class="text-sm font-dm-mono text-foreground/60">
-        &copy; 2026 {{ info.firstName }} {{ info.lastName }}
+        &copy; 2026 {{ USER.firstName }} {{ USER.lastName }}
       </p>
     </div>
   </footer>

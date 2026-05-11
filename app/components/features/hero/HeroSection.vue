@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { info } from "#shared/data/portfolio";
+import { USER } from "#shared/data/portfolio";
 
 const messages = [
   "Let's keep it centered... please!",
@@ -24,20 +24,20 @@ const messages = [
       NAVIGATING THE UNKNOWN, PIXEL BY PIXEL
     </p>
 
-    <DragSnapText :text="info.firstName" :typing-messages="messages.slice(0, 5)" />
+    <DragSnapText :text="USER.firstName" :typing-messages="messages.slice(0, 5)" />
 
     <DragSnapText :typing-messages="messages.slice(5, 10)" :overlay="false">
       <span class="text-transparent" style="-webkit-text-stroke: 1.5px var(--color-foreground)">
-        {{ info.lastName }}
+        {{ USER.lastName }}
       </span>
     </DragSnapText>
 
     <div class="flex flex-col items-center">
       <p class="text-xl md:text-2xl font-space-grotesk text-primary font-medium">
-        {{ info.title }}
+        {{ USER.jobTitle }}
       </p>
       <p class="text-base md:text-lg text-foreground/60 font-dm-sans mt-3 max-w-md">
-        {{ info.tagline }}
+        {{ USER.bio }}
       </p>
     </div>
   </section>
