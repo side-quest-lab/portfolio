@@ -4,8 +4,6 @@
   <div>
     <FeaturesHeroSection />
 
-    <UiSectionDivider />
-
     <FeaturesAboutSection />
 
     <UiSectionDivider />

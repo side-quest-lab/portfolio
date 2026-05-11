@@ -18,11 +18,9 @@ const messages = [
 <template>
   <section
     ref="section"
-    class="w-full h-screen pt-20 flex flex-col items-center justify-center gap-6 overflow-hidden font-space-grotesk text-7xl md:text-8xl lg:text-9xl text-foreground font-bold relative before:-top-px after:-bottom-px bg-[radial-gradient(var(--pattern-foreground)_1.5px,transparent_0)] bg-size-[20px_20px] bg-center [--pattern-foreground:var(--color-zinc-950)]/5 dark:[--pattern-foreground:var(--color-white)]/5"
+    class="w-full h-screen pt-20 flex flex-col items-center justify-center gap-6 overflow-hidden font-space-grotesk text-center text-7xl md:text-8xl lg:text-9xl text-foreground font-bold relative before:-top-px after:-bottom-px bg-[radial-gradient(var(--pattern-foreground)_1.5px,transparent_0)] bg-size-[20px_20px] bg-center [--pattern-foreground:var(--color-zinc-950)]/5 dark:[--pattern-foreground:var(--color-white)]/5"
   >
-    <p class="text-sm text-foreground/50 font-dm-mono text-center">
-      NAVIGATING THE UNKNOWN, PIXEL BY PIXEL
-    </p>
+    <p class="text-sm text-foreground/50 font-dm-mono">NAVIGATING THE UNKNOWN, PIXEL BY PIXEL</p>
 
     <DragSnapText :text="USER.firstName" :typing-messages="messages.slice(0, 5)" />
 
@@ -32,7 +30,7 @@ const messages = [
       </span>
     </DragSnapText>
 
-    <div class="flex flex-col items-center">
+    <div>
       <p class="text-xl md:text-2xl font-space-grotesk text-primary font-medium">
         {{ USER.jobTitle }}
       </p>

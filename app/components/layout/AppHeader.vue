@@ -6,7 +6,8 @@ import { USER } from "#shared/data/portfolio";
 
 const currentTime = ref("");
 
-const mobileMenuRef = useTemplateRef<HTMLElement>("mobileMenuRef");
+const headerRef = useTemplateRef("headerRef");
+const mobileMenuRef = useTemplateRef("mobileMenuRef");
 const mobileMenuOpen = ref(false);
 
 const lock = useBodyScrollLock();
@@ -16,9 +17,9 @@ watch(mobileMenuOpen, (isOpen) => {
 });
 
 const navLinks = [
+  { label: "ABOUT", target: "#about" },
   { label: "WORK", target: "#work" },
   { label: "EXPERIENCE", target: "#experience" },
-  { label: "ABOUT", target: "#about" },
   { label: "CONTACT", target: "#contact" },
 ];
 
@@ -106,6 +107,17 @@ function scrollToSection(target: string) {
 onMounted(() => {
   updateTime();
   timeInterval = setInterval(updateTime, 1000);
+
+  gsap.to(headerRef.value, {
+    background: "var(--color-background)",
+    duration: 0.01,
+    ease: "none",
+    scrollTrigger: {
+      trigger: headerRef.value,
+      start: "bottom top",
+      toggleActions: "play none reverse reset",
+    },
+  });
 });
 
 onBeforeUnmount(() => {
@@ -115,7 +127,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <header ref="headerRef" class="fixed top-0 left-0 right-0 z-50 bg-background">
+  <header ref="headerRef" class="fixed top-0 left-0 right-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
       <NuxtLink
         to="/"
