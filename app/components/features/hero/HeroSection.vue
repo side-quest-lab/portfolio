@@ -24,13 +24,13 @@ const messages = [
       NAVIGATING THE UNKNOWN, PIXEL BY PIXEL
     </p>
 
-    <UiDragSnapText :text="info.firstName" :typing-messages="messages.slice(0, 5)" />
+    <DragSnapText :text="info.firstName" :typing-messages="messages.slice(0, 5)" />
 
-    <UiDragSnapText :typing-messages="messages.slice(5, 10)" :show-grid="false">
+    <DragSnapText :typing-messages="messages.slice(5, 10)" :overlay="false">
       <span class="text-transparent" style="-webkit-text-stroke: 1.5px var(--color-foreground)">
         {{ info.lastName }}
       </span>
-    </UiDragSnapText>
+    </DragSnapText>
 
     <div class="flex flex-col items-center">
       <p class="text-xl md:text-2xl font-space-grotesk text-primary font-medium">

@@ -3,14 +3,6 @@ interface CursorTipProps {
   name: string;
   message: string;
 }
-
-interface CursorTipExposes {
-  moveToElement: (target: HTMLElement, vars?: gsap.TweenVars | undefined) => gsap.core.Tween;
-  showTyping: (vars?: gsap.TweenVars) => gsap.core.Tween;
-  hideTyping: (vars?: gsap.TweenVars) => gsap.core.Tween;
-  typeMessage: (onKeySound?: () => void) => gsap.core.Tween;
-  reset: (vars?: gsap.TweenVars) => gsap.core.Tween;
-}
 </script>
 
 <script setup lang="ts">
@@ -85,7 +77,7 @@ function reset(vars?: gsap.TweenVars) {
   return gsap.to(cursorTipEl.value, { ...vars, x: 0, y: 0 });
 }
 
-defineExpose<CursorTipExposes>({
+defineExpose({
   moveToElement,
   showTyping,
   hideTyping,

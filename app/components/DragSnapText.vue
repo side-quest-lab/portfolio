@@ -5,7 +5,7 @@ interface DragSnapTextProps {
   /** Whether to show the grid overlay.
    * @default true
    */
-  showGrid?: boolean;
+  overlay?: boolean;
   /** Array of typing messages to cycle through */
   typingMessages: string[];
 }
@@ -22,7 +22,7 @@ import Draggable from "gsap/Draggable";
 import { info } from "#shared/data/portfolio";
 
 const props = withDefaults(defineProps<DragSnapTextProps>(), {
-  showGrid: true,
+  overlay: true,
 });
 const slots = defineSlots<DragSnapTextSlots>();
 
@@ -47,10 +47,8 @@ onMounted(() => {
 
   if (!dragTargetRef.value || !gridOverlay || !gridAligningOverlay || !tip) return;
 
-  const gridOverlayEl = gridOverlay.$el;
-
   ctx = gsap.context(() => {
-    if (props.showGrid) {
+    if (props.overlay) {
       gridOverlay.show();
     }
 
@@ -66,11 +64,7 @@ onMounted(() => {
         const tl = gsap.timeline();
 
         tl.add(tip.moveToElement(dragTargetRef.value!, { duration: 1 }));
-
-        if (gridOverlayEl) {
-          tl.add(tip.moveToElement(gridOverlayEl, { duration: 0.3 }));
-        }
-
+        tl.add(tip.moveToElement(gridOverlay.$el, { duration: 0.3 }));
         tl.to(dragTargetRef.value, { x: 0, y: 0, duration: 0.3 });
         tl.add(gridAligningOverlay.flash());
         tl.add(tip.showTyping());
@@ -79,7 +73,7 @@ onMounted(() => {
         tl.add(tip.reset());
         tl.add(gridAligningOverlay.hide());
 
-        if (props.showGrid) {
+        if (props.overlay) {
           tl.add(gridOverlay.show());
         }
 
@@ -106,11 +100,11 @@ onBeforeUnmount(() => {
       </slot>
     </div>
 
-    <UiGridOverlay ref="grid-overlay" class="opacity-0" />
+    <GridOverlay ref="grid-overlay" :target="dragTargetRef" />
 
-    <UiGridAligningOverlay ref="grid-aligning-overlay" />
+    <GridAligningOverlay ref="grid-aligning-overlay" :target="dragTargetRef" />
 
-    <UiCursorTip
+    <CursorTip
       ref="cursor-tip"
       :name="`${info.firstName} ${info.lastName}`"
       :message="typingMessage"

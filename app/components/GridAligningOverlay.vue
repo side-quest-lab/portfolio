@@ -1,11 +1,7 @@
 <script lang="ts">
 interface GridAligningOverlayProps {
   label?: string;
-}
-
-interface GridAligningOverlayExposes {
-  flash: (fromVars?: gsap.TweenVars, toVars?: gsap.TweenVars) => gsap.core.Tween;
-  hide: (vars?: gsap.TweenVars) => gsap.core.Tween;
+  target?: HTMLElement | null;
 }
 </script>
 
@@ -16,18 +12,36 @@ const props = withDefaults(defineProps<GridAligningOverlayProps>(), {
   label: "Aligning to Grid...",
 });
 
+const { width, height } = useWindowSize();
 const el = useTemplateRef("el");
 
 let ctx: gsap.Context | undefined;
 
+function attach(target: HTMLElement) {
+  const targetRect = target.getBoundingClientRect();
+
+  return gsap.set(el.value, {
+    display: "none",
+    width: targetRect.width,
+    height: targetRect.height,
+    x: targetRect.x,
+    y: targetRect.y,
+    opacity: 0,
+  });
+}
+
 onMounted(() => {
-  ctx = gsap.context(() => {
-    gsap.set(el.value, { display: "none" });
+  nextTick(() => {
+    if (props.target) {
+      attach(props.target);
+    }
   });
 });
 
-onBeforeUnmount(() => {
-  ctx?.revert();
+watch([width, height], () => {
+  if (props.target) {
+    attach(props.target);
+  }
 });
 
 function flash(fromVars?: gsap.TweenVars, toVars?: gsap.TweenVars) {
@@ -42,11 +56,11 @@ function hide(vars?: gsap.TweenVars) {
   return gsap.to(el.value, { ...vars, display: "none" });
 }
 
-defineExpose<GridAligningOverlayExposes>({ flash, hide });
+defineExpose({ flash, hide });
 </script>
 
 <template>
-  <div ref="el" class="border border-primary opacity-0 absolute inset-0 *:bg-primary *:absolute">
+  <div ref="el" class="border border-primary fixed left-0 top-0 *:bg-primary *:absolute">
     <div class="size-1 -left-1 -top-1" />
     <div class="size-1 -right-1 -top-1" />
     <div class="size-1 -left-1 -bottom-1" />
