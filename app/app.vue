@@ -21,6 +21,8 @@ onMounted(() => {
 
 <template>
   <UApp>
+    <LoadingScreen />
+
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
