@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: "2025-07-15",
   css: ["~/assets/css/main.css"],
-  modules: ["@nuxt/ui", "@vueuse/nuxt"],
+  modules: ["@nuxt/ui", "@vueuse/nuxt", "@nuxtjs/mdc"],
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {

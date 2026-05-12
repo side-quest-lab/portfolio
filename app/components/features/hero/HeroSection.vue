@@ -25,7 +25,7 @@ const messages = [
     <DragSnapText :text="USER.firstName" :typing-messages="messages.slice(0, 5)" />
 
     <DragSnapText :typing-messages="messages.slice(5, 10)" :overlay="false">
-      <span class="text-transparent" style="-webkit-text-stroke: 1.5px var(--color-foreground)">
+      <span class="text-transparent [-webkit-text-stroke:1.5px_var(--color-foreground)]">
         {{ USER.lastName }}
       </span>
     </DragSnapText>

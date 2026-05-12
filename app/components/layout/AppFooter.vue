@@ -8,8 +8,7 @@ import { SOCIAL_LINKS, USER } from "#shared/data/portfolio";
       <h2 class="font-space-grotesk text-4xl font-bold">
         LET'S
         <span
-          class="max-w-fit uppercase text-transparent"
-          style="-webkit-text-stroke: 1.5px var(--color-foreground)"
+          class="max-w-fit uppercase text-transparent [-webkit-text-stroke:1.5px_var(--color-foreground)]"
           >TALK.</span
         >
       </h2>
