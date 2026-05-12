@@ -16,16 +16,20 @@ export default defineNuxtConfig({
         "gsap/ScrollSmoother",
         "gsap/ScrollToPlugin",
         "gsap/Draggable",
+        "gsap/InertiaPlugin",
+        "gsap/SplitText",
       ],
     },
   },
-  app: {
-    head: {
-      htmlAttrs: {
-        lang: "en",
-        class: "dark",
+  icon: {
+    customCollections: [
+      {
+        prefix: "icons",
+        dir: "app/assets/icons",
       },
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    },
+    ],
+  },
+  colorMode: {
+    preference: "dark",
   },
 });

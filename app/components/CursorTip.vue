@@ -88,9 +88,7 @@ defineExpose({
 
 <template>
   <div ref="cursorTipEl" class="absolute top-[-100vh] left-[-100vw] z-10000">
-    <svg width="16" height="20" viewBox="0 0 14 18" fill="none">
-      <path d="M0.5 0.5L13 10.5H5.5L2.5 17.5L0.5 0.5Z" class="fill-primary" />
-    </svg>
+    <UIcon name="i-icons:cursor" class="block text-base text-primary" />
 
     <div class="mx-4 space-y-1 text-background font-bold">
       <div class="w-fit px-1 py-0.5 bg-primary text-xs font-space-grotesk rounded-xs">
