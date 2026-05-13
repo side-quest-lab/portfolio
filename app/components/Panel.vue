@@ -42,7 +42,9 @@ const props = withDefaults(defineProps<PanelProps>(), {
 });
 
 const labelParts = computed(() => splitByCase(props.label ?? ""));
-const labelSuffix = computed(() => labelParts.value.at(-1));
+const labelSuffix = computed(() =>
+  labelParts.value.length > 1 ? labelParts.value.at(-1) : undefined,
+);
 const labelPrefix = computed(() => {
   const suffix = labelSuffix.value;
   return suffix ? props.label?.replace(new RegExp(`${suffix}$`), "") : props.label;
