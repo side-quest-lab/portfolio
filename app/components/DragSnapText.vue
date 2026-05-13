@@ -39,53 +39,65 @@ const gridAligningOverlayRef = useTemplateRef("grid-aligning-overlay");
 const cursorTipRef = useTemplateRef("cursor-tip");
 
 let ctx: gsap.Context | undefined;
+let snapTimeline: gsap.core.Timeline | undefined;
 
 onMounted(() => {
   const gridOverlay = gridOverlayRef.value;
   const gridAligningOverlay = gridAligningOverlayRef.value;
   const tip = cursorTipRef.value;
+  const dragTarget = dragTargetRef.value;
 
-  if (!dragTargetRef.value || !gridOverlay || !gridAligningOverlay || !tip) return;
+  if (!dragTarget || !gridOverlay || !gridAligningOverlay || !tip) return;
 
   ctx = gsap.context(() => {
+    gsap.registerPlugin(Draggable);
+
     if (props.overlay) {
       gridOverlay.show();
     }
 
-    Draggable.create(dragTargetRef.value, {
+    Draggable.create(dragTarget, {
       type: "x,y",
       bounds: "body",
       inertia: true,
       dragResistance: 0.5,
       onDragStart() {
+        snapTimeline?.kill();
+        snapTimeline = undefined;
+
         gridOverlay.hide();
       },
       onThrowComplete() {
-        const tl = gsap.timeline();
+        snapTimeline = gsap.timeline({
+          defaults: {
+            overwrite: "auto",
+          },
+          onComplete() {
+            messageIndex.value++;
+            snapTimeline = undefined;
+          },
+        });
 
-        tl.add(tip.moveToElement(dragTargetRef.value!, { duration: 1 }));
-        tl.add(tip.moveToElement(gridOverlay.$el, { duration: 0.3 }));
-        tl.to(dragTargetRef.value, { x: 0, y: 0, duration: 0.3 });
-        tl.add(gridAligningOverlay.flash());
-        tl.add(tip.showTyping());
-        tl.add(tip.typeMessage(playKeySound));
-        tl.add(tip.hideTyping());
-        tl.add(tip.reset());
-        tl.add(gridAligningOverlay.hide());
+        snapTimeline.add(tip.moveToElement(dragTarget, { duration: 1 }));
+        snapTimeline.add(tip.moveToElement(gridOverlay.$el, { duration: 0.3 }));
+        snapTimeline.to(dragTarget, { x: 0, y: 0, duration: 0.3 });
+        snapTimeline.add(gridAligningOverlay.flash());
+        snapTimeline.add(tip.showTyping());
+        snapTimeline.add(tip.typeMessage(playKeySound));
+        snapTimeline.add(tip.hideTyping());
+        snapTimeline.add(tip.reset());
+        snapTimeline.add(gridAligningOverlay.hide());
 
         if (props.overlay) {
-          tl.add(gridOverlay.show());
+          snapTimeline.add(gridOverlay.show());
         }
-
-        tl.call(() => {
-          messageIndex.value++;
-        });
       },
     });
   });
 });
 
 onBeforeUnmount(() => {
+  snapTimeline?.revert();
   ctx?.revert();
 });
 </script>
