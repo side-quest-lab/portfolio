@@ -1,5 +1,26 @@
 <script setup lang="ts">
+import gsap from "gsap";
+
 import { USER } from "#shared/data/portfolio";
+
+let ctx: gsap.Context | undefined;
+
+onMounted(() => {
+  ctx = gsap.context(() => {
+    gsap.from(".about-image", {
+      y: "50%",
+      scrollTrigger: {
+        trigger: "#about",
+        toggleActions: "play none none none",
+        scrub: 0.5,
+      },
+    });
+  });
+});
+
+onBeforeUnmount(() => {
+  ctx?.revert();
+});
 </script>
 
 <template>
