@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="bg-background font-sans w-screen min-h-screen relative overflow-x-hidden">
+  <LoadingScreen />
+
+  <div class="w-full max-w-screen min-h-screen bg-background font-sans relative overflow-x-hidden">
     <LayoutAppHeader />
     <ScrollSmootherWrapper>
       <main>
