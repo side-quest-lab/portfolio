@@ -6,7 +6,7 @@ const MDC = resolveComponent("MDC");
 
 const theme = {
   slots: {
-    root: "max-w-7xl mx-auto py-4",
+    root: "max-w-7xl mx-auto px-4 py-4",
     header: "px-4 sm:px-6",
     label: "font-space-grotesk text-3xl md:text-4xl font-bold text-foreground uppercase",
     labelSuffix: "text-transparent [-webkit-text-stroke:1.5px_var(--color-foreground)]",

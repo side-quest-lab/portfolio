@@ -1,68 +1,32 @@
 <script setup lang="ts">
-import gsap from "gsap";
 import { USER } from "#shared/data/portfolio";
-
-const sectionRef = ref<HTMLElement | null>(null);
-let ctx: gsap.Context | undefined;
-
-onMounted(() => {
-  if (!sectionRef.value) return;
-
-  ctx = gsap.context(() => {
-    gsap.from(".about-heading", {
-      opacity: 0,
-      y: 40,
-      duration: 0.7,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: sectionRef.value,
-        start: "top 80%",
-      },
-    });
-
-    gsap.from(".about-content", {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      delay: 0.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: sectionRef.value,
-        start: "top 75%",
-      },
-    });
-  }, sectionRef.value);
-});
-
-onBeforeUnmount(() => {
-  ctx?.revert();
-});
 </script>
 
 <template>
-  <section ref="sectionRef" id="about">
-    <span class="text-sm text-foreground/30 font-dm-mono block mb-4"> 02 </span>
-
-    <h2
-      class="about-heading font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-foreground max-w-3xl leading-tight mb-8"
-    >
-      {{ USER.bio }}
-    </h2>
-
-    <div class="about-content max-w-2xl">
-      <p
-        class="text-foreground/60 font-dm-sans text-base md:text-lg leading-relaxed mb-8 whitespace-pre-line"
+  <section id="about" class="max-w-7xl mx-auto px-4 py-4 grid md:grid-cols-2 gap-8">
+    <div class="space-y-10">
+      <h2
+        class="about-heading text-foreground text-4xl md:text-5xl lg:text-6xl font-space-grotesk font-bold"
       >
-        {{ USER.about }}
-      </p>
+        ABOUT
+      </h2>
 
-      <a
-        :href="`mailto:${decodeEmail(USER.email)}`"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-600 text-white font-space-grotesk font-medium rounded-lg transition-colors"
-      >
-        <UIcon name="i-lucide-mail" class="w-4 h-4" />
-        GET IN TOUCH
-      </a>
+      <h3 class="about-bio text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight">
+        {{ USER.bio }}
+      </h3>
+
+      <MDC :value="USER.about" class="about-body md:text-lg" />
+
+      <UButton
+        icon="i-lucide:mail"
+        label="GET IN TOUCH"
+        :to="`mailto:${decodeEmail(USER.email)}`"
+        class="about-cta px-6 py-3 font-space-grotesk text-foreground font-medium"
+      />
+    </div>
+
+    <div class="about-image justify-self-center">
+      <img :src="USER.avatar" alt="profile" class="w-md rounded-xl" />
     </div>
   </section>
 </template>
