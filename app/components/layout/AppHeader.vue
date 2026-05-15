@@ -132,6 +132,7 @@ onBeforeUnmount(() => {
       <NuxtLink
         to="/"
         class="font-space-grotesk text-lg font-bold tracking-tight text-foreground hover:text-primary transition-colors"
+        @click="scrollToSection('#hero')"
       >
         {{ USER.firstName }}
       </NuxtLink>
@@ -146,6 +147,7 @@ onBeforeUnmount(() => {
         <a
           v-for="link in navLinks"
           :key="link.label"
+          :href="link.target"
           class="cursor-pointer text-sm font-space-grotesk text-foreground/60 hover:text-foreground transition-colors"
           @click="scrollToSection(link.target)"
         >
@@ -191,6 +193,7 @@ onBeforeUnmount(() => {
           <a
             v-for="link in navLinks"
             :key="link.label"
+            :href="link.target"
             class="cursor-pointer text-base font-space-grotesk text-foreground/60 hover:text-foreground transition-colors"
             @click="scrollToSection(link.target)"
           >
