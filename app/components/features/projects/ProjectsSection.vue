@@ -1,44 +1,24 @@
 <script setup lang="ts">
-import gsap from "gsap";
 import { PROJECTS } from "#shared/data/portfolio";
-
-const sectionRef = ref<HTMLElement | null>(null);
-let ctx: gsap.Context | undefined;
-
-onMounted(() => {
-  if (!sectionRef.value) return;
-
-  ctx = gsap.context(() => {
-    gsap.from(".project-card", {
-      opacity: 0,
-      y: 50,
-      stagger: 0.15,
-      duration: 0.7,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: sectionRef.value,
-        start: "top 80%",
-      },
-    });
-  }, sectionRef.value);
-});
-
-onBeforeUnmount(() => {
-  ctx?.revert();
-});
 </script>
 
 <template>
-  <section ref="sectionRef" id="work">
-    <UiSectionHeading number="03" title="FEATURED WORK" />
-
-    <div class="space-y-6">
+  <Panel
+    id="work"
+    label="Featured Work"
+    :ui="{
+      root: 'space-y-10',
+      body: 'space-y-10',
+    }"
+  >
+    <template #body>
       <FeaturesProjectsCard
         v-for="(project, index) in PROJECTS"
         :key="project.id"
         :project="project"
         :index="index"
+        class="last:mb-0"
       />
-    </div>
-  </section>
+    </template>
+  </Panel>
 </template>

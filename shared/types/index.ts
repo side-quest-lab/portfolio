@@ -37,6 +37,12 @@ export interface Experience {
   isCurrentEmployer?: boolean;
 }
 
+export interface ProjectStat {
+  value: string;
+  label: string;
+  icon?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -49,6 +55,9 @@ export interface Project {
   stacks: string[];
   description?: string;
   logo?: string;
+  image?: string;
+  category?: string;
+  stats?: ProjectStat[];
   isExpanded?: boolean;
 }
 
