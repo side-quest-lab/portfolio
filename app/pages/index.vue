@@ -2,20 +2,20 @@
 
 <template>
   <div>
-    <FeaturesHeroSection />
+    <HeroSection />
 
-    <FeaturesAboutSection />
-
-    <UiSectionDivider />
-
-    <FeaturesProjectsSection />
+    <AboutSection />
 
     <UiSectionDivider />
 
-    <FeaturesExperienceSection />
+    <ExperienceSection />
 
     <UiSectionDivider />
 
-    <FeaturesSkillsSection />
+    <ProjectsSection />
+
+    <UiSectionDivider />
+
+    <SkillsSection />
   </div>
 </template>

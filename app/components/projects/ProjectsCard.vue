@@ -11,7 +11,7 @@ defineProps<{
     <div class="flex flex-col lg:flex-row">
       <div class="order-1 flex items-center p-4 lg:order-2 lg:w-[58%] lg:p-6">
         <div
-          class="max-h-52 relative aspect-video w-full overflow-hidden rounded-xl bg-linear-to-br from-foreground/5 via-accent/5 to-foreground/10 transition-all duration-700 group-hover:from-foreground/10 group-hover:via-accent/10 lg:rounded-2xl"
+          class="max-h-52 md:max-h-full relative aspect-video w-full overflow-hidden rounded-xl bg-linear-to-br from-foreground/5 via-accent/5 to-foreground/10 transition-all duration-700 group-hover:from-foreground/10 group-hover:via-accent/10 lg:rounded-2xl"
         >
           <img
             v-if="project.image"

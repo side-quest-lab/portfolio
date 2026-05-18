@@ -8,12 +8,12 @@ onBeforeMount(() => {
   <LoadingScreen />
 
   <div class="w-full max-w-screen min-h-screen bg-background font-sans relative overflow-x-hidden">
-    <LayoutAppHeader />
+    <AppHeader />
     <ScrollSmootherWrapper>
       <main>
         <slot></slot>
       </main>
-      <LayoutAppFooter />
+      <AppFooter />
     </ScrollSmootherWrapper>
   </div>
 </template>
