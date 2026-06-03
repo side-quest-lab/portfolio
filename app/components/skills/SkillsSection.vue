@@ -17,7 +17,7 @@ const groupedSkills = computed(() => {
 
 <template>
   <Panel
-    id="skills"
+    id="skill"
     label="Skills & Expertise"
     :ui="{
       root: 'space-y-10',

@@ -18,9 +18,9 @@ watch(mobileMenuOpen, (isOpen) => {
 
 const navLinks = [
   { label: "ABOUT", target: "#about" },
-  { label: "WORK", target: "#work" },
   { label: "EXPERIENCE", target: "#experience" },
-  { label: "CONTACT", target: "#contact" },
+  { label: "WORK", target: "#work" },
+  { label: "SKILL", target: "#skill" },
 ];
 
 let timeInterval: ReturnType<typeof setInterval> | undefined;
