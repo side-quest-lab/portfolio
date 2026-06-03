@@ -11,21 +11,16 @@ defineProps<{
     :href="skill.href"
     target="_blank"
     rel="noopener noreferrer"
-    class="group relative bg-foreground/3 rounded-2xl p-5 border border-foreground/5 hover:border-primary/20 hover:bg-foreground/6 transition-all duration-300"
+    class="group flex items-center gap-3 p-3 border border-muted/50 hover:border-primary hover:bg-primary/10 transition-all rounded-lg"
   >
-    <div class="flex items-center gap-4">
-      <div
-        class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors"
-        :style="skill.color ? { backgroundColor: `${skill.color}15` } : {}"
-      >
-        <UIcon :name="skill.icon" class="w-6 h-6" :style="{ color: skill.color || undefined }" />
-      </div>
-
-      <div class="min-w-0">
-        <h4 class="font-space-grotesk font-semibold text-foreground text-sm truncate">
-          {{ skill.title }}
-        </h4>
-      </div>
+    <div
+      class="shrink-0 w-8 h-8 rounded-md flex items-center justify-center transition-colors"
+      :style="skill.color ? { backgroundColor: `${skill.color}15` } : {}"
+    >
+      <UIcon :name="skill.icon" class="w-4 h-4" :style="{ color: skill.color || undefined }" />
     </div>
+    <span class="text-sm font-dm-mono text-foreground/70 group-hover:text-foreground truncate">
+      {{ skill.title }}
+    </span>
   </a>
 </template>
