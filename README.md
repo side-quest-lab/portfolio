@@ -9,14 +9,14 @@ A modern, immersive portfolio website built with **Nuxt 4**, **Vue 3**, and **Ta
 
 ## Overview
 
-A portfolio template with smooth GSAP-powered animations, interactive drag-and-snap elements, a space-themed visual design, and responsive layouts. All personal content is centralized in a single data file for easy customization.
+A single-page portfolio template with smooth GSAP-powered animations, interactive drag-and-snap elements, a space-themed visual design, and responsive layouts. All personal content is centralized in a single data file for easy customization.
 
 ## Tech Stack
 
 - **Framework**: [Nuxt 4](https://nuxt.com/) with Vue 3
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (no `tailwind.config.js`, theme config via CSS `@theme`)
 - **UI Components**: [@nuxt/ui v4](https://ui.nuxt.com/)
-- **Animation**: [GSAP](https://gsap.com/) + Draggable + SplitText
+- **Animation**: [GSAP](https://gsap.com/) + Draggable + SplitText + ScrollTrigger
 - **Utilities**: [VueUse](https://vueuse.org/), clsx, tailwind-merge
 - **Linting**: [oxlint](https://oxc.rs/docs/guide/usage/linter.html)
 - **Formatting**: [oxfmt](https://github.com/oxc-project/oxc)
@@ -29,17 +29,23 @@ portfolio/
 ├── app/
 │   ├── assets/css/main.css      # Global styles & Tailwind v4 theme config
 │   ├── components/
-│   │   ├── features/            # Domain sections (hero, about, skills, projects, experience)
-│   │   ├── layout/              # AppHeader, AppFooter
-│   │   └── ui/                  # Reusable primitives (SectionHeading, MetricBadge, TechPill, DragSnapText)
+│   │   ├── Panel.vue            # Reusable section panel wrapper
+│   │   ├── AboutSection.vue     # About section
+│   │   ├── HeroSection.vue      # Hero with draggable elements
+│   │   ├── ExperienceSection.vue # Work experience timeline
+│   │   ├── AppHeader.vue        # Navigation header
+│   │   ├── AppFooter.vue        # Footer
+│   │   ├── LoadingScreen.vue    # Loading screen
+│   │   ├── ScrollSmootherWrapper.vue
+│   │   ├── projects/            # Project section & card components
+│   │   ├── skills/              # Skills section & card components
+│   │   └── ui/                  # Reusable primitives (SectionHeading, SectionDivider, MetricBadge, TechPill)
 │   ├── composables/             # Vue composables (auto-imported)
 │   ├── layouts/
 │   │   └── default.vue          # Root layout
 │   ├── pages/
-│   │   ├── index.vue            # Home page
-│   │   ├── projects.vue         # Project listing
-│   │   └── projects/[id].vue    # Project detail
-│   ├── utils/                   # Helper utilities (cn, clsx + tailwind-merge)
+│   │   └── index.vue            # Single-page home (all sections)
+│   ├── utils/                   # Helper utilities (cn, string helpers)
 │   └── app.vue                  # Root app wrapper
 ├── shared/
 │   ├── data/portfolio.ts        # Single source of truth for portfolio content
@@ -53,13 +59,11 @@ portfolio/
 
 ## Features
 
-- **Interactive Hero**: Video background with space/cosmic aesthetics, draggable canvas elements, and entrance animations
-- **DragSnapText**: GSAP-powered draggable text with snap-back animation, typing effect with synthesized key sounds, and sequential reactive messages
-- **About Section**: Personal bio, avatar, and resume download
-- **Skills Grid**: Categorized skills with proficiency levels and experience indicators
-- **Project Showcase**: Featured and categorized projects with cards, links, and detail pages
-- **Experience Timeline**: Professional work history with company logos and tech stacks
-- **Contact & Footer**: Social links and contact information
+- **Interactive Hero**: GSAP-powered draggable text with snap-back animation, typing effect with synthesized key sounds, and sequential reactive messages
+- **About Section**: Personal bio, avatar, and contact CTA
+- **Experience Timeline**: Professional work history with company names and employment types
+- **Project Showcase**: Grid-based project cards with collapsible "show more" via `UCollapsible`, numbered cards
+- **Skills Grid**: Categorized tech stack (Frontend, Backend, Database, Tools, Mobile) with icon cards using `Panel` layout
 - **GSAP Animations**: Drag-and-drop, SplitText typing effects, scroll-triggered animations
 - **Responsive Design**: Optimized for all screen sizes
 - **Dark Theme**: Always dark mode with custom cosmic color palette
@@ -74,48 +78,32 @@ portfolio/
 ### Installation
 
 ```bash
-# Clone the repository
 git clone <repository-url>
 cd portfolio
-
-# Install dependencies
 pnpm install
 ```
 
 ### Development
 
 ```bash
-# Start development server on http://localhost:3000
-pnpm dev
+pnpm dev          # http://localhost:3000
 ```
 
 ### Build
 
 ```bash
-# Production build
-pnpm build
-
-# Static site generation
-pnpm generate
-
-# Preview production build locally
-pnpm preview
+pnpm build        # production build
+pnpm generate     # static site generation
+pnpm preview      # preview production build
 ```
 
 ### Code Quality
 
 ```bash
-# Run linter
-pnpm lint
-
-# Fix linting issues
-pnpm lint:fix
-
-# Format code
-pnpm fmt
-
-# Check formatting
-pnpm fmt:check
+pnpm lint         # oxlint
+pnpm lint:fix     # oxlint --fix
+pnpm fmt          # oxfmt
+pnpm fmt:check    # oxfmt --check
 ```
 
 ## Customization
@@ -123,7 +111,7 @@ pnpm fmt:check
 All portfolio content is centralized in `shared/data/portfolio.ts`. Update this file to modify:
 
 - Personal information (name, title, bio, contact)
-- Skills and proficiency levels
+- Tech stack skills
 - Projects (descriptions, tech stack, links, images)
 - Work experience
 - Social media links
@@ -132,14 +120,12 @@ Types are defined in `shared/types/index.ts`.
 
 ## Theme
 
-The site uses a **dark-only** cosmic theme with the following key colors:
+The site uses a **dark-only** cosmic theme. All theme configuration is in `app/assets/css/main.css` using Tailwind CSS v4's `@theme` directive.
 
 - **Primary**: Purple (`#7c3aed`)
 - **Accent**: Cyan (`#06b6d4`)
 - **Secondary**: Indigo
 - **Background**: Dark space tones
-
-Theme configuration is located in `app/assets/css/main.css` using Tailwind CSS v4's `@theme` directive.
 
 ## Fonts
 
